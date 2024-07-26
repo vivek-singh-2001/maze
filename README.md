@@ -1,33 +1,52 @@
-# Maze Game
+# Maze Ball Game
 
-This is a browser-based maze game built using Matter.js, a 2D physics engine. The game generates a random maze and includes a ball that the player can navigate using the arrow keys. The objective is to reach the green goal area. Upon reaching the goal, the walls fall down and the game resets after a brief delay.
+## Overview
+
+Maze Ball is a web-based game where the player controls a ball to navigate through a maze. The maze is procedurally generated, meaning it changes each time you play. The goal is to reach the green goal area while avoiding the red walls. The game uses the Matter.js physics engine for realistic ball movement and collision detection.
 
 ## Features
 
-- Randomly generated maze
-- Responsive design that adjusts to the browser window size
-- Realistic physics with Matter.js
-- Win condition that triggers a visual effect and game reset
-- Simple and intuitive controls
+- **Procedurally Generated Maze:** The maze layout changes with each game.
+- **Ball Control:** Use arrow keys to move the ball.
+- **Dynamic Resize:** The game canvas adjusts to window size changes.
+- **Collision Detection:** Realistic ball and wall interactions.
+- **Win Condition:** Reach the goal to complete the game.
 
-## Table of Contents
+## Technologies Used
 
-- [Demo](#demo)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Game Controls](#game-controls)
-- [Code Structure](#code-structure)
-- [Contributing](#contributing)
-- [License](#license)
+- **JavaScript:** For game logic and interactivity.
+- **Matter.js:** A 2D physics engine for rendering and physics.
+- **HTML/CSS:** For structuring and styling the game canvas.
 
-## Demo
+## Project Structure
 
-You can play the game live [here](https://your-game-demo-link.com).
+- `index.js`: Main entry point for the game, initializes the game and sets up the game loop.
+- `/features/`
+  - `utils.js`: Contains utility functions like `shuffle` used for maze generation.
+  - `walls.js`: Defines and creates the maze walls.
+  - `maze.js`: Handles maze generation logic.
+  - `goal.js`: Defines and creates the goal area.
+  - `ball.js`: Defines and handles ball creation and movement.
+- `index.html`: HTML file that includes the game canvas and script references.
 
 ## Installation
 
-1. Clone the repository:
+1. **Clone the Repository**
 
-   ```sh
-   git clone https://github.com/your-username/maze-game.git
-   cd maze-game
+   ```bash
+   git clone https://github.com/yourusername/maze-ball-game.git
+
+2. **Navigate to the Project Directory**
+
+   ```bash
+   cd maze
+
+3. **Open the Project**
+    ```bash
+   index.html
+
+
+## Acknowledgements
+
+  -  Matter.js - 2D physics engine used for the game.
+  -  Open Source Community - For the tools and resources that made this project possible.
