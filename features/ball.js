@@ -1,35 +1,44 @@
 export const createBall = (world, unitLengthX, unitLengthY, engine, width, height, Matter) => {
-    const { Bodies, Body, Events,World } = Matter;
-    const ballRadius = Math.min(unitLengthX, unitLengthY) / 4;
-    const ball = Bodies.circle(unitLengthX / 2, unitLengthY / 2, ballRadius, {
-      label: 'ball',
-      render: { fillStyle: 'blue' },
+  const { Bodies, Body, Events, World } = Matter;
+  const personImage = new Image();
+  personImage.src = '../utils/MARIO.gif'; // Path to your person image
+
+  // Adjust size and position as needed
+  const personWidth = unitLengthX * 0.7;
+  const personHeight = unitLengthY * 0.7;
+
+  // Create a person with an image texture
+  const person = Bodies.rectangle(unitLengthX / 2, unitLengthY / 2, personWidth, personHeight, {
+      label: 'person',
+      isStatic: false,
+      render: {
+          sprite: {
+              texture: personImage.src,
+              xScale: 0.1, // Adjust the scale as needed
+              yScale: 0.1  // Adjust the scale as needed
+          }
+      },
       collisionFilter: { group: -1 },
       friction: 1,
       restitution: 0.8
-    });
-    World.add(world, ball);
-  
-    const maxVelocity = 8;
-    const velocityIncrement = 4;
-  
-    document.addEventListener('keydown', event => {
-      const { x, y } = ball.velocity;
-      if (event.code === "ArrowUp" && y > -maxVelocity) Body.setVelocity(ball, { x, y: y - velocityIncrement });
-      if (event.code === "ArrowRight" && x < maxVelocity) Body.setVelocity(ball, { x: x + velocityIncrement, y });
-      if (event.code === "ArrowDown" && y < maxVelocity) Body.setVelocity(ball, { x, y: y + velocityIncrement });
-      if (event.code === "ArrowLeft" && x > -maxVelocity) Body.setVelocity(ball, { x: x - velocityIncrement, y });
-    });
-  
-    // document.addEventListener('keyup', () => {
-    //   Body.setVelocity(ball, { x: 0, y: 0 });
-    // });
-  
-    Events.on(engine, 'beforeUpdate', () => {
-      if (ball.position.x < 0 || ball.position.x > width || ball.position.y < 0 || ball.position.y > height) {
-        Body.setPosition(ball, { x: unitLengthX / 2, y: unitLengthY / 2 });
-        Body.setVelocity(ball, { x: 0, y: 0 });
+  });
+  World.add(world, person);
+
+  const maxVelocity = 8;
+  const velocityIncrement = 4;
+
+  document.addEventListener('keydown', event => {
+      const { x, y } = person.velocity;
+      if (event.code === "ArrowUp" && y > -maxVelocity) Body.setVelocity(person, { x, y: y - velocityIncrement });
+      if (event.code === "ArrowRight" && x < maxVelocity) Body.setVelocity(person, { x: x + velocityIncrement, y });
+      if (event.code === "ArrowDown" && y < maxVelocity) Body.setVelocity(person, { x, y: y + velocityIncrement });
+      if (event.code === "ArrowLeft" && x > -maxVelocity) Body.setVelocity(person, { x: x - velocityIncrement, y });
+  });
+
+  Events.on(engine, 'beforeUpdate', () => {
+      if (person.position.x < 0 || person.position.x > width || person.position.y < 0 || person.position.y > height) {
+          Body.setPosition(person, { x: unitLengthX / 2, y: unitLengthY / 2 });
+          Body.setVelocity(person, { x: 0, y: 0 });
       }
-    });
-  };
-  
+  });
+};

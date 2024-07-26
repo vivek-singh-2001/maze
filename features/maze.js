@@ -1,7 +1,7 @@
-import { shuffle } from './utils.js'; 
+import { shuffle } from './utils.js';
 
 export const createMaze = (world, unitLengthX, unitLengthY, cellsHorizontal, cellsVertical, Matter) => {
-  const { Bodies ,World} = Matter;
+  const { Bodies, World } = Matter;
   const grid = Array(cellsVertical).fill(null).map(() => Array(cellsHorizontal).fill(false));
   const verticals = Array(cellsVertical).fill(null).map(() => Array(cellsHorizontal - 1).fill(false));
   const horizontals = Array(cellsVertical - 1).fill(null).map(() => Array(cellsHorizontal).fill(false));
@@ -20,7 +20,6 @@ export const createMaze = (world, unitLengthX, unitLengthY, cellsHorizontal, cel
     grid[row][column] = true;
 
     // Assamble randomly order-list of neighbours
-
     const neighbors = shuffle([
       [row - 1, column, 'up'],
       [row, column + 1, 'right'],
@@ -28,17 +27,14 @@ export const createMaze = (world, unitLengthX, unitLengthY, cellsHorizontal, cel
       [row, column - 1, 'left']
     ]);
 
-
     // ?for each neighbor...
-
-
     for (let neighbor of neighbors) {
       const [nextRow, nextColumn, direction] = neighbor;
 
-    //   check if neighbor is out of bound
+      //   check if neighbor is out of bound
       if (nextRow < 0 || nextRow >= cellsVertical || nextColumn < 0 || nextColumn >= cellsHorizontal) continue;
 
- //  if we have visted neighbor then continue to next neighbor
+      //  if we have visted neighbor then continue to next neighbor
       if (grid[nextRow][nextColumn]) continue;
       if (direction === 'left') verticals[row][column - 1] = true;
       else if (direction === 'right') verticals[row][column] = true;
@@ -74,7 +70,7 @@ export const createMaze = (world, unitLengthX, unitLengthY, cellsHorizontal, cel
         rowIndex * unitLengthY + unitLengthY / 2,
         5,
         unitLengthY,
-        { label: 'wall', isStatic: true, render: { fillStyle: 'red' } }
+        { label: 'wall', isStatic: true, render: { fillStyle: 'yellow' } }
       );
       World.add(world, wall);
     });

@@ -6,8 +6,8 @@ import { createBall } from './features/ball.js';
 
 const { Engine, Render, Runner, World, Events } = Matter;
 
-const cellsHorizontal = 20;
-const cellsVertical = 20;
+const cellsHorizontal = 15;
+const cellsVertical = 15;
 let width = window.innerWidth;
 let height = window.innerHeight;
 
@@ -55,7 +55,7 @@ createBall(world, unitLengthX, unitLengthY, engine, width, height, Matter);
 // Win Condition
 Events.on(engine, 'collisionStart', event => {
   event.pairs.forEach(collision => {
-    const labels = ['ball', 'goal'];
+    const labels = ['person', 'goal'];
     if (labels.includes(collision.bodyA.label) && labels.includes(collision.bodyB.label)) {
       world.gravity.y = 1;
       world.bodies.forEach(body => {
