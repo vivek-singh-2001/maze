@@ -34,7 +34,7 @@ Maze Ball is a web-based game where the player controls a ball to navigate throu
 1. **Clone the Repository**
 
    ```bash
-   git clone https://github.com/yourusername/maze-ball-game.git
+   git clone https://github.com/vivek-singh-2001/maze.git
 
 2. **Navigate to the Project Directory**
 
