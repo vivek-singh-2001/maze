@@ -1,4 +1,4 @@
-import { shuffle } from './utils.js'; // Ensure shuffle is imported from utils
+import { shuffle } from './utils.js'; 
 
 export const createMaze = (world, unitLengthX, unitLengthY, cellsHorizontal, cellsVertical, Matter) => {
   const { Bodies ,World} = Matter;
@@ -10,22 +10,42 @@ export const createMaze = (world, unitLengthX, unitLengthY, cellsHorizontal, cel
   const startColumn = Math.floor(Math.random() * cellsHorizontal);
 
   const stepThroughCell = (row, column) => {
+
+
+    //  if i have visited the cell at [row, col] then return
     if (grid[row][column]) return;
+
+
+    // mark this cell as bieng visited
     grid[row][column] = true;
+
+    // Assamble randomly order-list of neighbours
+
     const neighbors = shuffle([
       [row - 1, column, 'up'],
       [row, column + 1, 'right'],
       [row + 1, column, 'down'],
       [row, column - 1, 'left']
     ]);
+
+
+    // ?for each neighbor...
+
+
     for (let neighbor of neighbors) {
       const [nextRow, nextColumn, direction] = neighbor;
+
+    //   check if neighbor is out of bound
       if (nextRow < 0 || nextRow >= cellsVertical || nextColumn < 0 || nextColumn >= cellsHorizontal) continue;
+
+ //  if we have visted neighbor then continue to next neighbor
       if (grid[nextRow][nextColumn]) continue;
       if (direction === 'left') verticals[row][column - 1] = true;
       else if (direction === 'right') verticals[row][column] = true;
       else if (direction === 'up') horizontals[row - 1][column] = true;
       else if (direction === 'down') horizontals[row][column] = true;
+
+      //  continue th loop
       stepThroughCell(nextRow, nextColumn);
     }
   };
